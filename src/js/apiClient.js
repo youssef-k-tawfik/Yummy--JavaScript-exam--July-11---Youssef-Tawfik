@@ -1,5 +1,6 @@
 import Meal from "./meal.js";
 import Category from "./category.js";
+import Ingredient from "./ingredient.js";
 
 const loading = $("#loadingIndicator");
 function toggleLoadingScreen() {
@@ -20,7 +21,7 @@ export function getMeals(query, byCharacter = false) {
       });
       toggleLoadingScreen();
 
-      return listMeals;
+      return listMeals.slice(0, 20);
     })
     .catch((err) => {
       console.error("Error: ", err);
@@ -95,9 +96,7 @@ export function getAreas() {
 
 export function getMealsByArea(area) {
   toggleLoadingScreen();
-  return fetch(
-    `https://www.themealdb.com/api/json/v1/1/filter.php?a=${area}`
-  )
+  return fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?a=${area}`)
     .then((res) => res.json())
     .then((data) => {
       const listMeals = [];
@@ -106,6 +105,37 @@ export function getMealsByArea(area) {
       });
       toggleLoadingScreen();
       return listMeals;
+    })
+    .catch((error) => console.error("Error: ", error));
+}
+
+export function getIngredients() {
+  toggleLoadingScreen();
+  return fetch("https://www.themealdb.com/api/json/v1/1/list.php?i=list")
+    .then((res) => res.json())
+    .then((data) => {
+      const listIngredients = [];
+      data.meals.forEach((ingredient) =>
+        listIngredients.push(new Ingredient(ingredient))
+      );
+      console.log(listIngredients);
+      toggleLoadingScreen();
+      return listIngredients.slice(0,20);
+    })
+    .catch((error) => console.error("Error: ", error));
+}
+
+export function getMealsByIngredient(ingredient) {
+  toggleLoadingScreen();
+  return fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?i=${ingredient}`)
+    .then((res) => res.json())
+    .then((data) => {
+      const listMeals = [];
+      data.meals.forEach((meal) => {
+        listMeals.push(new Meal(meal));
+      });
+      toggleLoadingScreen();
+      return listMeals.slice(0,20);
     })
     .catch((error) => console.error("Error: ", error));
 }

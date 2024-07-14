@@ -1,0 +1,9 @@
+[X] SideNav Animation
+[X] Search link displays 2 inputs (search with a name and a letter)
+[X] Categories displays categories and when clicked shows corresponding meals and each meal is clickable to its details
+[X] Areas displays areas and when clicked shows corresponding meals and each meal is clickable to its details
+[X] Ingredients displays ingredients and when clicked shows corresponding meals and each meal is clickable to its details
+[X] ContactUs shows a signup form using regex with the submit button disabled till all regex are met
+[X] Api calls return only the first 20 meals
+[X] Clicked meal shows all its details
+[X] Responsive Design

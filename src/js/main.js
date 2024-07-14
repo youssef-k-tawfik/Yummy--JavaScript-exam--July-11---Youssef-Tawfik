@@ -1,7 +1,7 @@
 import * as api from "./apiClient.js";
 import * as ui from "./ui.js";
 
-// * Side Nav Bar * //
+// & Side Nav Bar & //
 const widthSideNav = $("#hiddenSideNav").outerWidth(true);
 const heightNav = $("nav").outerHeight(true);
 
@@ -45,13 +45,13 @@ $(".nav-link")
     $("#searchInputs").remove();
   });
 
-// * Home Page Meals * //
+// & Home Page Meals & //
 api
   .getMeals("")
   .then((listMeals) => ui.displayMeals(listMeals))
   .catch((error) => console.error("Error: ", error));
 
-// * Search Meal * //
+// & Search Meal & //
 $("#linkSearch").on("click", function () {
   // * show inputs
   ui.displayInputs();
@@ -65,7 +65,7 @@ $("#linkSearch").on("click", function () {
   });
 });
 
-// * Categories Page * //
+// & Categories Page & //
 $("#linkCategories").on("click", clickCategories);
 
 function clickCategories() {
@@ -75,12 +75,22 @@ function clickCategories() {
     .catch((error) => console.error("Error: ", error));
 }
 
-// * Areas Page * //
+// & Areas Page & //
 $("#linkArea").on("click", clickAreas);
 
 function clickAreas() {
   api
     .getAreas()
     .then((listAreas) => ui.displayAreas(listAreas))
+    .catch((error) => console.error("Error: ", error));
+}
+
+// & Ingredients Page & //
+$("#linkIngredients").on("click", clickIngredients);
+
+function clickIngredients() {
+  api
+    .getIngredients()
+    .then((listIngredients) => ui.displayIngredients(listIngredients))
     .catch((error) => console.error("Error: ", error));
 }

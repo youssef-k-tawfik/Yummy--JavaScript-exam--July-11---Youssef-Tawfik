@@ -107,7 +107,7 @@ export function displayInputs() {
 }
 
 function addListeners() {
-  // * Meal Details
+  // & Meal Details
   $(".meal-overlay").on("click", function (e) {
     const idMeal = e.target.dataset.id;
     api
@@ -118,7 +118,7 @@ function addListeners() {
       .catch((error) => console.error("Error: ", error));
   });
 
-  // * search event
+  // & search event
   $("#mealSearchInput").on("input", function () {
     debouncedSearch.call(this, false);
   });
@@ -126,7 +126,7 @@ function addListeners() {
     debouncedSearch.call(this, true);
   });
 
-  // * Category Details
+  // & Category Details
   $(".category-overlay").on("click", function (e) {
     const category = e.currentTarget.dataset.id;
     api
@@ -137,11 +137,22 @@ function addListeners() {
       .catch((error) => console.error("Error: ", error));
   });
 
-  // * Areas
+  // & Areas
   $(".area").on("click", function (e) {
     const clickedArea = e.currentTarget.dataset.area;
     api
       .getMealsByArea(clickedArea)
+      .then((listMeals) => {
+        displayMeals(listMeals);
+      })
+      .catch((error) => console.error("Error: ", error));
+  });
+
+  // & Ingredients
+  $(".ingredient").on("click", function (e) {
+    const clickedIngredient = e.currentTarget.dataset.ingredient;
+    api
+      .getMealsByIngredient(clickedIngredient)
       .then((listMeals) => {
         displayMeals(listMeals);
       })
@@ -201,6 +212,25 @@ export function displayAreas(listAreas) {
   }
   listAreas.forEach((area) =>
     dataContainer.html(dataContainer.html() + generateArea(area))
+  );
+  addListeners();
+}
+
+export function displayIngredients(listIngredients) {
+  dataContainer.html("");
+  function generateIngredient({ name, description }) {
+    return `
+    <div data-ingredient="${name}" class="meal text-center ingredient">
+      <div class="cursor-pointer">
+        <i class="fa-solid fa-drumstick-bite font-black text-6xl"></i>
+        <h2 class="text-2xl font-medium">${name}</h2>
+        <p>${description}</p>
+      </div>
+    </div>
+    `;
+  }
+  listIngredients.forEach((ingredient) =>
+    dataContainer.html(dataContainer.html() + generateIngredient(ingredient))
   );
   addListeners();
 }
