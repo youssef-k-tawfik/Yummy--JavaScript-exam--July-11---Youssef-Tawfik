@@ -43,32 +43,44 @@ function showMealDetails({
   }
 
   dataContainer.html(`
-      <div class="w-1/3 p-2">
-        <div class="img-container">
-          <img src="${srcImg}" alt="${name} meal" />
-        </div>
-        <h1 class="text-3xl font-medium">${name}</h1>
-      </div>
-      <div id="mealDetails" class="w-2/3 p-2">
-        <h2 class="text-3xl font-medium mb-2">Instructions</h2>
-        <p class="mb-4">${instructions}</p>
-        <h2 class="section-heading font-bold">
-          Area : <span class="font-medium">${area}</span>
-        </h2>
-        <h2 class="section-heading font-bold">
-          Category : <span class="font-medium">${category}</span>
-        </h2>
-        <h2 class="section-heading font-medium">Recipes :</h2>
-        <div id="recipesContainer" class="flex flex-wrap gap-2 mb-4">
-        </div>
-        <h2 class="section-heading font-medium">Tags :</h2>
-        <div id="tagsContainer" class="flex flex-wrap gap-2 mb-4">
-        </div>
-        <div id="mealLinks" class="pt-4">
-          <a aria-roledescription="button" class="btn bg-[#198754] hover:bg-[#157347]" href="${mealSrc}" target="_blank">Source</a>
-          <a aria-roledescription="button" class="btn bg-[#dc3545] hover:bg-[#bb2d3b]" href="${mealYT}" target="_blank">Youtube</a>
-        </div>
-      </div>
+      <div class="flex flex-wrap w-full flex-col md:flex-row">
+  <div class="md:w-1/3 p-2">
+    <div class="img-container">
+      <img src="${srcImg}" alt="${name} meal" />
+    </div>
+    <h1 class="text-3xl font-medium">${name}</h1>
+  </div>
+  <div id="mealDetails" class="md:w-2/3 p-2">
+    <h2 class="text-3xl font-medium mb-2">Instructions</h2>
+    <p class="mb-4">${instructions}</p>
+    <h2 class="section-heading font-bold">
+      Area : <span class="font-medium">${area}</span>
+    </h2>
+    <h2 class="section-heading font-bold">
+      Category : <span class="font-medium">${category}</span>
+    </h2>
+    <h2 class="section-heading font-medium">Recipes :</h2>
+    <div id="recipesContainer" class="flex flex-wrap gap-2 mb-4"></div>
+    <h2 class="section-heading font-medium">Tags :</h2>
+    <div id="tagsContainer" class="flex flex-wrap gap-2 mb-4"></div>
+    <div id="mealLinks" class="pt-4">
+      <a
+        aria-roledescription="button"
+        class="btn bg-[#198754] hover:bg-[#157347]"
+        href="${mealSrc}"
+        target="_blank"
+        >Source</a
+      >
+      <a
+        aria-roledescription="button"
+        class="btn bg-[#dc3545] hover:bg-[#bb2d3b]"
+        href="${mealYT}"
+        target="_blank"
+        >Youtube</a
+      >
+    </div>
+  </div>
+</div>
     `);
   recipes.forEach((recipe) =>
     $("#recipesContainer").html(
@@ -82,7 +94,7 @@ function showMealDetails({
 
 export function displayInputs() {
   $("body").prepend(`
-    <div id="searchInputs" class="w-full flex justify-center gap-3">
+    <div id="searchInputs" class="w-full flex justify-center gap-3 flex-col md:flex-row items-center">
       <div class="input-container">
         <input
           type="text"
