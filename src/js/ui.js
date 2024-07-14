@@ -11,7 +11,7 @@ export function displayMeals(listMeals) {
       <div class="meal">
         <div class="img-container">
           <img src="${srcImg}" alt="${name} Meal" />
-          <div data-meal-id=${id} class="overlay">${name}</div>
+          <div data-id=${id} class="meal-overlay">${name}</div>
         </div>
       </div>
     `;
@@ -108,12 +108,23 @@ export function displayInputs() {
 
 function addListeners() {
   // * Meal Details
-  $(".overlay").on("click", function (e) {
-    const idMeal = e.target.dataset.mealId;
+  $(".meal-overlay").on("click", function (e) {
+    const idMeal = e.target.dataset.id;
     api
       .getMealDetails(idMeal)
       .then((meal) => {
         showMealDetails(new Meal(meal));
+      })
+      .catch((error) => console.error("Error: ", error));
+  });
+
+  // * Category Details
+  $(".category-overlay").on("click", function (e) {
+    const category = e.currentTarget.dataset.id;
+    api
+      .getMealsByCategory(category)
+      .then((listMeals) => {
+        displayMeals(listMeals);
       })
       .catch((error) => console.error("Error: ", error));
   });
@@ -142,4 +153,25 @@ function debounce(func, delay) {
     clearTimeout(timeout);
     timeout = setTimeout(() => func.apply(context, args), delay);
   };
+}
+
+export function displayCategories(listCategories) {
+  dataContainer.html("");
+  function generateCategory({ name, srcImg, description }) {
+    return `
+      <div class="meal">
+        <div class="img-container">
+          <img src="${srcImg}" alt="${name} Category" />
+          <div data-id=${name} class="category-overlay">
+          <h2 class="">${name}</h2>
+          <p>${description}</p>
+          </div>
+        </div>
+      </div>
+    `;
+  }
+  listCategories.forEach((category) =>
+    dataContainer.html(dataContainer.html() + generateCategory(category))
+  );
+  addListeners();
 }

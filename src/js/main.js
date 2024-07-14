@@ -26,6 +26,7 @@ $("#navBtn").on("click", function () {
 });
 // TODO: unite nav animation in one function
 $("nav li").on("click", function () {
+  // *
   $("#sideNav").animate({ left: -widthSideNav });
   $("nav ul").animate({ top: heightNav }, 400);
   $("nav li").each(function (index) {
@@ -36,6 +37,13 @@ $("nav li").on("click", function () {
   $("#navBtn i").toggleClass("hidden");
   navOpen = !navOpen;
 });
+
+// * hide inputs if other pages are clicked
+$(".nav-link")
+  .not("#linkSearch")
+  .on("click", function () {
+    $("#searchInputs").remove();
+  });
 
 // * Home Page Meals * //
 api
@@ -56,3 +64,13 @@ $("#linkSearch").on("click", function () {
     $(this).parent().removeClass("input-focused");
   });
 });
+
+// * Categories Page * //
+$("#linkCategories").on("click", clickCategories);
+
+function clickCategories() {
+  api
+    .getCategories()
+    .then((listCategories) => ui.displayCategories(listCategories))
+    .catch((error) => console.error("Error: ", error));
+}

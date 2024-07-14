@@ -749,7 +749,8 @@ video {
 .meal {
   width: 25%;
   padding: 0.5rem;
-  & :hover .overlay {
+  & :hover .meal-overlay,
+    :hover .category-overlay {
     top: 0px;
   }
 }
@@ -759,61 +760,105 @@ video {
   cursor: pointer;
   overflow: hidden;
   border-radius: 0.5rem;
-  --tw-bg-opacity: 1;
-  background-color: rgb(14 165 233 / var(--tw-bg-opacity));
-  & .overlay {
+  & .meal-overlay {
     position: absolute;
   }
-  & .overlay {
+  & .meal-overlay {
     inset: 0px;
   }
-  & .overlay {
+  & .meal-overlay {
     top: 100%;
   }
-  & .overlay {
+  & .meal-overlay {
     display: flex;
   }
-  & .overlay {
+  & .meal-overlay {
     align-items: center;
   }
-  & .overlay {
+  & .meal-overlay {
     overflow: hidden;
   }
-  & .overlay {
+  & .meal-overlay {
     --tw-bg-opacity: 1;
     background-color: rgb(255 255 255 / var(--tw-bg-opacity));
   }
-  & .overlay {
+  & .meal-overlay {
     --tw-bg-opacity: 0.8;
   }
-  & .overlay {
+  & .meal-overlay {
     padding: 1rem;
   }
-  & .overlay {
+  & .meal-overlay {
     font-weight: 600;
   }
-  & .overlay {
+  & .meal-overlay {
     --tw-text-opacity: 1;
     color: rgb(0 0 0 / var(--tw-text-opacity));
   }
-  & .overlay {
+  & .meal-overlay {
     transition-property: all;
     transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
     transition-duration: 150ms;
   }
-  & .overlay {
+  & .meal-overlay {
     transition-duration: 500ms;
   }
   @media (min-width: 768px) {
-    & .overlay {
+    & .meal-overlay {
       font-size: 1rem;
       line-height: 1.5rem;
     }
   }
   @media (min-width: 1024px) {
-    & .overlay {
+    & .meal-overlay {
       font-size: 1.875rem;
       line-height: 2.25rem;
+    }
+  }
+  & .category-overlay {
+    position: absolute;
+  }
+  & .category-overlay {
+    inset: 0px;
+  }
+  & .category-overlay {
+    top: 100%;
+  }
+  & .category-overlay {
+    overflow: hidden;
+  }
+  & .category-overlay {
+    --tw-bg-opacity: 1;
+    background-color: rgb(255 255 255 / var(--tw-bg-opacity));
+  }
+  & .category-overlay {
+    --tw-bg-opacity: 0.8;
+  }
+  & .category-overlay {
+    padding: 1rem;
+  }
+  & .category-overlay {
+    text-align: center;
+  }
+  & .category-overlay {
+    --tw-text-opacity: 1;
+    color: rgb(0 0 0 / var(--tw-text-opacity));
+  }
+  & .category-overlay {
+    transition-property: all;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 150ms;
+  }
+  & .category-overlay {
+    transition-duration: 500ms;
+  }
+  & .category-overlay {
+    & h2 {
+      font-size: 1.5rem;
+      line-height: 2rem;
+    }
+    & h2 {
+      font-weight: 500;
     }
   }
 }

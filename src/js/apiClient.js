@@ -1,4 +1,5 @@
 import Meal from "./meal.js";
+import Category from "./category.js";
 
 const loading = $("#loadingIndicator");
 function toggleLoadingScreen() {
@@ -43,4 +44,37 @@ export function getMealDetails(idMeal) {
       console.error("Error: ", error);
       toggleLoadingScreen();
     });
+}
+
+export function getCategories() {
+  toggleLoadingScreen();
+  return fetch("https://www.themealdb.com/api/json/v1/1/categories.php")
+    .then((res) => res.json())
+    .then((data) => {
+      const listCategories = [];
+
+      data.categories.forEach((category) =>
+        listCategories.push(new Category(category))
+      );
+      toggleLoadingScreen();
+      return listCategories;
+    })
+    .catch((error) => console.error("Error: ", error));
+}
+
+export function getMealsByCategory(category) {
+  toggleLoadingScreen();
+  return fetch(
+    `https://www.themealdb.com/api/json/v1/1/filter.php?c=${category}`
+  )
+    .then((res) => res.json())
+    .then((data) => {
+      const listMeals = [];
+      data.meals.forEach((meal) => {
+        listMeals.push(new Meal(meal));
+      });
+      toggleLoadingScreen();
+      return listMeals;
+    })
+    .catch((error) => console.error("Error: ", error));
 }

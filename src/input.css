@@ -8,14 +8,21 @@
   }
   .meal {
     @apply w-1/4 p-2;
-    & :hover .overlay {
+    & :hover .meal-overlay,
+    :hover .category-overlay {
       @apply top-0;
     }
   }
   .img-container {
-    @apply cursor-pointer bg-sky-500 rounded-lg overflow-hidden relative;
-    & .overlay {
+    @apply cursor-pointer  rounded-lg overflow-hidden relative;
+    & .meal-overlay {
       @apply absolute inset-0 top-full transition-all duration-500 bg-white bg-opacity-80 flex items-center md:text-base lg:text-3xl text-black p-4 font-semibold overflow-hidden;
+    }
+    & .category-overlay {
+      @apply absolute inset-0 top-full transition-all duration-500 bg-white bg-opacity-80 text-center text-black p-4 overflow-hidden;
+      & h2{
+        @apply font-medium text-2xl
+      }
     }
   }
   .nav-link {
