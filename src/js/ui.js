@@ -9,9 +9,9 @@ export function displayMeals(listMeals) {
   function generateMeal({ srcImg, name, id }) {
     return `
       <div class="meal">
-        <div class="img-container">
+        <div data-id=${id} class="img-container">
           <img src="${srcImg}" alt="${name} Meal" />
-          <div data-id=${id} class="meal-overlay">${name}</div>
+          <div class="meal-overlay">${name}</div>
         </div>
       </div>
     `;
@@ -108,8 +108,8 @@ export function displayInputs() {
 
 function addListeners() {
   // & Meal Details
-  $(".meal-overlay").on("click", function (e) {
-    const idMeal = e.target.dataset.id;
+  $(".img-container").on("click", function (e) {
+    const idMeal = e.currentTarget.dataset.id;
     api
       .getMealDetails(idMeal)
       .then((meal) => {
@@ -127,7 +127,7 @@ function addListeners() {
   });
 
   // & Category Details
-  $(".category-overlay").on("click", function (e) {
+  $(".category-img-container").on("click", function (e) {
     const category = e.currentTarget.dataset.id;
     api
       .getMealsByCategory(category)
@@ -182,9 +182,9 @@ export function displayCategories(listCategories) {
   function generateCategory({ name, srcImg, description }) {
     return `
       <div class="meal">
-        <div class="img-container">
+        <div data-id=${name} class="category-img-container">
           <img src="${srcImg}" alt="${name} Category" />
-          <div data-id=${name} class="category-overlay">
+          <div  class="category-overlay">
           <h2 class="">${name}</h2>
           <p>${description}</p>
           </div>
@@ -233,4 +233,163 @@ export function displayIngredients(listIngredients) {
     dataContainer.html(dataContainer.html() + generateIngredient(ingredient))
   );
   addListeners();
+}
+
+export function displaySignUpForm() {
+  dataContainer.html(`
+      <form class="text-black w-full flex flex-wrap justify-center gap-6">
+        <div class="w-[90%] mx-auto md:mx-0 md:w-[40%]">
+          <input
+            type="text"
+            id="inputName"
+            class="bg-white border outline-0 border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+            placeholder="Enter Your Name"
+            required
+          />
+          <div class="alert hidden">
+            <p>Special characters and numbers not allowed</p>
+          </div>
+        </div>
+        <div class="w-[90%] mx-auto md:mx-0 md:w-[40%]">
+          <input
+            type="email"
+            id="inputEmail"
+            class="bg-white border outline-0 border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+            placeholder="Enter Your Email"
+            required
+          />
+          <div class="alert hidden">
+            <p>Email not valid *exemple@yyy.zzz</p>
+          </div>
+        </div>
+        <div class="w-[90%] mx-auto md:mx-0 md:w-[40%]">
+          <input
+            type="text"
+            id="inputPhone"
+            class="bg-white border outline-0 border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+            placeholder="Enter Your Phone"
+            required
+          />
+          <div class="alert hidden">
+            <p>Enter valid Phone Number</p>
+            <p>*example +201234567879</p>
+            <p>*example 01234567879</p>
+          </div>
+        </div>
+        <div class="w-[90%] mx-auto md:mx-0 md:w-[40%]">
+          <input
+            type="number"
+            id="inputAge"
+            class="bg-white border outline-0 border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+            placeholder="Enter Your Age"
+            required
+          />
+          <div class="alert hidden">
+            <p>Enter valid age between 13 and 120</p>
+          </div>
+        </div>
+        <div class="w-[90%] mx-auto md:mx-0 md:w-[40%]">
+          <input
+            type="password"
+            id="inputPW"
+            class="bg-white border outline-0 border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+            placeholder="Enter Your Password"
+            required
+          />
+          <div class="alert hidden">
+            <p>
+              Enter valid password *Minimum eight characters, at least one
+              letter and one number:*
+            </p>
+          </div>
+        </div>
+        <div class="w-[90%] mx-auto md:mx-0 md:w-[40%]">
+          <input
+            type="password"
+            id="inputRewritePW"
+            class="bg-white border outline-0 border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+            placeholder="Re-write your password"
+            required
+          />
+          <div class="alert hidden">
+            <p>Enter valid repassword</p>
+          </div>
+        </div>
+        <div id="formBtn" class="w-full text-center">
+          <button
+            disabled
+            class="enabled:hover:bg-red-600 enabled:hover:border-red-600 enabled:hover:text-white transition-colors duration-300 py-2 px-4 border border-red-600 text-red-600 disabled:border-red-900 disabled:text-red-900 rounded-lg"
+          >
+            Submit
+          </button>
+        </div>
+      </form>
+    `);
+  dataContainer.addClass("form-container");
+
+  // * toggle inputs shadow effect
+  $("form input").on("focus", function () {
+    $(this).addClass("input-focused");
+  });
+  $("form input").on("focusout", function () {
+    $(this).removeClass("input-focused");
+  });
+
+  $("form").on("submit", (e) => e.preventDefault());
+
+  $("form input").on("input", function () {
+    const input = $(this);
+    const inputValue = input.val();
+    const valid = validateInput(input[0], inputValue);
+
+    if (!valid) {
+      input.next().removeClass("hidden");
+    } else {
+      input.next().addClass("hidden");
+    }
+    if (
+      validateInput($("form input").eq(0)[0], $("form input").eq(0).val()) &&
+      validateInput($("form input").eq(1)[0], $("form input").eq(1).val()) &&
+      validateInput($("form input").eq(2)[0], $("form input").eq(2).val()) &&
+      validateInput($("form input").eq(3)[0], $("form input").eq(3).val()) &&
+      validateInput($("form input").eq(4)[0], $("form input").eq(4).val()) &&
+      validateInput($("form input").eq(5)[0], $("form input").eq(5).val())
+    ) {
+      $("#formBtn button").attr("disabled", false);
+    }
+  });
+}
+
+function validateInput(input, value) {
+  const inputName = $("#inputName")[0];
+  const inputEmail = $("#inputEmail")[0];
+  const inputPhone = $("#inputPhone")[0];
+  const inputAge = $("#inputAge")[0];
+  const inputPW = $("#inputPW")[0];
+  const inputRePW = $("#inputRewritePW")[0];
+
+  let regex;
+  switch (input) {
+    case inputName:
+      regex = /^[a-zA-Z\s]+$/;
+      break;
+    case inputEmail:
+      regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+      break;
+    case inputPhone:
+      regex = /^(?:\+201[0125]|01[0125])\d{8}$/;
+      break;
+    case inputAge:
+      regex = /^(1[3-9]|[2-9]\d|1[01]\d|120)$/;
+      break;
+    case inputPW:
+      regex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
+      break;
+    case inputRePW:
+      return inputRePW.value === inputPW.value;
+
+    default:
+      break;
+  }
+  return regex.test(value);
 }

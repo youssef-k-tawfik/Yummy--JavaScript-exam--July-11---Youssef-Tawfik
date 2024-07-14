@@ -44,6 +44,11 @@ $(".nav-link")
   .on("click", function () {
     $("#searchInputs").remove();
   });
+$(".nav-link")
+  .not("#linkContact")
+  .on("click", function () {
+    $("main").removeClass("form-container");
+  });
 
 // & Home Page Meals & //
 api
@@ -94,3 +99,8 @@ function clickIngredients() {
     .then((listIngredients) => ui.displayIngredients(listIngredients))
     .catch((error) => console.error("Error: ", error));
 }
+
+// & Contact Us & //
+$("#linkContact").on("click", function () {
+  ui.displaySignUpForm();
+});
