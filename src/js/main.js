@@ -74,3 +74,13 @@ function clickCategories() {
     .then((listCategories) => ui.displayCategories(listCategories))
     .catch((error) => console.error("Error: ", error));
 }
+
+// * Areas Page * //
+$("#linkArea").on("click", clickAreas);
+
+function clickAreas() {
+  api
+    .getAreas()
+    .then((listAreas) => ui.displayAreas(listAreas))
+    .catch((error) => console.error("Error: ", error));
+}

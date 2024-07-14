@@ -118,6 +118,14 @@ function addListeners() {
       .catch((error) => console.error("Error: ", error));
   });
 
+  // * search event
+  $("#mealSearchInput").on("input", function () {
+    debouncedSearch.call(this, false);
+  });
+  $("#mealCharacterSearchInput").on("input", function () {
+    debouncedSearch.call(this, true);
+  });
+
   // * Category Details
   $(".category-overlay").on("click", function (e) {
     const category = e.currentTarget.dataset.id;
@@ -129,12 +137,15 @@ function addListeners() {
       .catch((error) => console.error("Error: ", error));
   });
 
-  // * search event
-  $("#mealSearchInput").on("input", function () {
-    debouncedSearch.call(this, false);
-  });
-  $("#mealCharacterSearchInput").on("input", function () {
-    debouncedSearch.call(this, true);
+  // * Areas
+  $(".area").on("click", function (e) {
+    const clickedArea = e.currentTarget.dataset.area;
+    api
+      .getMealsByArea(clickedArea)
+      .then((listMeals) => {
+        displayMeals(listMeals);
+      })
+      .catch((error) => console.error("Error: ", error));
   });
 }
 
@@ -172,6 +183,24 @@ export function displayCategories(listCategories) {
   }
   listCategories.forEach((category) =>
     dataContainer.html(dataContainer.html() + generateCategory(category))
+  );
+  addListeners();
+}
+
+export function displayAreas(listAreas) {
+  dataContainer.html("");
+  function generateArea(area) {
+    return `
+    <div data-area="${area}" class="meal text-center area">
+      <div class="cursor-pointer">
+        <i class="fa-solid fa-house-laptop font-black text-6xl"></i>
+        <h2 class="text-2xl font-medium">${area}</h2>
+      </div>
+    </div>
+    `;
+  }
+  listAreas.forEach((area) =>
+    dataContainer.html(dataContainer.html() + generateArea(area))
   );
   addListeners();
 }

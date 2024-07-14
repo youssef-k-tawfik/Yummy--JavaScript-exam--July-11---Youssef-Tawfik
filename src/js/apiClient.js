@@ -78,3 +78,34 @@ export function getMealsByCategory(category) {
     })
     .catch((error) => console.error("Error: ", error));
 }
+
+export function getAreas() {
+  toggleLoadingScreen();
+  return fetch("https://www.themealdb.com/api/json/v1/1/list.php?a=list")
+    .then((res) => res.json())
+    .then((data) => {
+      const listAreas = [];
+      data.meals.forEach(({ strArea }) => listAreas.push(strArea));
+      console.log(listAreas);
+      toggleLoadingScreen();
+      return listAreas;
+    })
+    .catch((error) => console.error("Error: ", error));
+}
+
+export function getMealsByArea(area) {
+  toggleLoadingScreen();
+  return fetch(
+    `https://www.themealdb.com/api/json/v1/1/filter.php?a=${area}`
+  )
+    .then((res) => res.json())
+    .then((data) => {
+      const listMeals = [];
+      data.meals.forEach((meal) => {
+        listMeals.push(new Meal(meal));
+      });
+      toggleLoadingScreen();
+      return listMeals;
+    })
+    .catch((error) => console.error("Error: ", error));
+}
