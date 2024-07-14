@@ -1,0 +1,6 @@
+requirements.txt
+node_modules/
+.env
+package-lock.json
+tailwind.config.js
+input.css
