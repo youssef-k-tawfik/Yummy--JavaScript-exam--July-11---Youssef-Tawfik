@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../dist/css/all.min.css" />
+    <!-- * Spinner -->
+    <link rel="stylesheet" href="../dist/css/scaling-circles.css" />
+    <link rel="stylesheet" href="../dist/css/main.css" />
+    <link rel="shortcut icon" href="./images/logo.png" type="image/x-icon" />
+    <title>Yummy</title>
+  </head>
+  <body class="bg-primary-bg text-white py-5">
+    <!-- * Side NavBar -->
+    <div id="sideNav" class="z-50 flex fixed top-0 start-0 bottom-0">
+      <div
+        id="hiddenSideNav"
+        class="max-w-60 p-6 flex flex-col justify-between bg-primary-bg"
+      >
+        <nav class="overflow-hidden relative">
+          <ul class="relative top-0">
+            <li id="linkSearch" class="nav-link">Search</li>
+            <li id="linkCategories" class="nav-link">Categories</li>
+            <li id="linkArea" class="nav-link">Area</li>
+            <li id="linkIngredients" class="nav-link">Ingredients</li>
+            <li id="linkContact" class="nav-link">Contact Us</li>
+          </ul>
+        </nav>
+        <footer>
+          <div class="social">
+            <i class="fa-brands fa-facebook"></i>
+            <i class="fa-brands fa-twitter"></i>
+            <i class="fa-solid fa-globe"></i>
+          </div>
+          <p>Copyright &copy;2019 All Rights Reserved</p>
+        </footer>
+      </div>
+      <div
+        class="bg-white text-black px-2 py-6 flex flex-col justify-between items-center"
+      >
+        <div class="logo-container">
+          <img src="./images/logo.png" alt="yummy logo" width="50" />
+        </div>
+        <div id="navBtn" class="cursor-pointer">
+          <i class="fa-solid fa-bars text-3xl"></i>
+          <i class="fa-solid fa-times text-4xl hidden"></i>
+        </div>
+        <div id="navIcons" class="flex flex-col gap-2">
+          <i class="fa-solid fa-globe cursor-pointer"></i>
+          <i class="fa-solid fa-share-nodes cursor-pointer"></i>
+        </div>
+      </div>
+    </div>
+
+    <!-- * Data -->
+    <main id="dataRow" class="custom-container">
+      <!-- ! Generated meal
+      <div class="meal">
+        <div class="img-container">
+          <img src="./images/sushi.jpg" alt="" />
+        </div>
+        <div class="overlay">btngan</div>
+      </div>
+      ! -->
+      <!-- ! Generated meal Details
+      <div class="w-1/3 p-2">
+        <div class="img-container">
+          <img src="./images/sushi.jpg" alt="" />
+        </div>
+        <h1 class="text-3xl font-medium">Sushi</h1>
+      </div>
+      <div id="mealDetails" class="w-2/3 p-2">
+        <h2 class="text-3xl font-medium mb-2">Instructions</h2>
+        <p class="mb-4">
+          Fry the finely chopped onions and minced meat in oil. Add the salt and
+          pepper. Grease a round baking tray and put a layer of pastry in it.
+          Cover with a thin layer of filling and cover this with another layer
+          of filo pastry which must be well coated in oil. Put another layer of
+          filling and cover with pastry. When you have five or six layers, cover
+          with filo pastry, bake at 200ºC/392ºF for half an hour and cut in
+          quarters and serve.
+        </p>
+        <h2 class="section-heading font-bold">
+          Area : <span class="font-medium">Croatian</span>
+        </h2>
+        <h2 class="section-heading font-bold">
+          Category : <span class="font-medium">Side</span>
+        </h2>
+        <h2 class="section-heading font-medium">Recipes :</h2>
+        <div id="recipesContainer" class="flex flex-wrap gap-2 mb-4">
+          <div class="recipe">1 Packet Filo Pastry</div>
+          <div class="recipe">1 Packet Filo Pastry</div>
+          <div class="recipe">1 Packet Filo Pastry</div>
+          <div class="recipe">1 Packet Filo Pastry</div>
+        </div>
+        <h2 class="section-heading font-medium">Tags :</h2>
+        <div id="tagsContainer" class="flex flex-wrap gap-2 mb-4">
+          <div class="tag">1 Packet Filo Pastry</div>
+          <div class="tag">1 Packet Filo Pastry</div>
+          <div class="tag">1 Packet Filo Pastry</div>
+          <div class="tag">1 Packet Filo Pastry</div>
+        </div>
+        <div id="mealLinks">
+          <button class="btn bg-[#198754] hover:bg-[#157347]">
+            <a href="">Source</a>
+          </button>
+          <button class="btn bg-[#dc3545] hover:bg-[#bb2d3b]">
+            <a href="">Youtube</a>
+          </button>
+        </div>
+      </div>
+      ! -->
+      <!-- ! Generated Search Page
+      <div id="searchInputs" class="w-full flex justify-center gap-3">
+        <div class="input-container">
+          <input
+            type="text"
+            id="mealSearchInput"
+            placeholder="Search By Name"
+            class="searchInput"
+          />
+        </div>
+        <div class="input-container">
+          <input
+            type="text"
+            id="mealCharacterSearchInput"
+            placeholder="Search By First Letter"
+            class="searchInput"
+            maxlength="1"
+          />
+        </div>
+      </div>
+      ! -->
+    </main>
+
+    <!-- <div
+      id="loadingIndicator"
+      class="fixed inset-0 flex justify-center items-center bg-primary-bg hidden"
+    >
+      Loading ...3
+    </div> -->
+    <div
+      id="loadingIndicator"
+      class="fixed inset-0 flex justify-center items-center bg-primary-bg hidden"
+    >
+      <div class="dot-spinner">
+        <div class="dot-spinner__dot"></div>
+        <div class="dot-spinner__dot"></div>
+        <div class="dot-spinner__dot"></div>
+        <div class="dot-spinner__dot"></div>
+        <div class="dot-spinner__dot"></div>
+        <div class="dot-spinner__dot"></div>
+        <div class="dot-spinner__dot"></div>
+        <div class="dot-spinner__dot"></div>
+      </div>
+    </div>
+    <!-- * Scripts -->
+    <script src="../dist/js/jquery-3.7.1.min.js"></script>
+    <script type="module" src="./js/main.js"></script>
+  </body>
+</html>

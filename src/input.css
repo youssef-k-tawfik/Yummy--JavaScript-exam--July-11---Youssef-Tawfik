@@ -1,0 +1,46 @@
+@tailwind base;
+@tailwind utilities;
+@tailwind components;
+
+@layer utilities {
+  .custom-container {
+    @apply w-10/12 mx-auto py-5 flex flex-wrap max-w-[1200px];
+  }
+  .meal {
+    @apply w-1/4 p-2;
+    & :hover .overlay {
+      @apply top-0;
+    }
+  }
+  .img-container {
+    @apply cursor-pointer bg-sky-500 rounded-lg overflow-hidden relative;
+    & .overlay {
+      @apply absolute inset-0 top-full transition-all duration-500 bg-white bg-opacity-80 flex items-center md:text-base lg:text-3xl text-black p-4 font-semibold overflow-hidden;
+    }
+  }
+  .nav-link {
+    @apply mb-4 relative top-52 cursor-pointer;
+  }
+  .recipe {
+    @apply px-2 py-1 bg-[#cff4fc] text-[#055160] rounded-lg;
+  }
+  .tag {
+    @apply px-2 py-1 bg-[#f8d7da] text-[#842029] rounded-lg;
+  }
+  .btn {
+    @apply py-2 px-3 rounded-lg transition-colors duration-300;
+  }
+  .section-heading {
+    @apply text-2xl  mb-2;
+  }
+  .input-container {
+    @apply w-[40%] p-2 border border-white rounded-lg;
+  }
+  .input-focused {
+    box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+    border-color: #86b7fe;
+  }
+  .searchInput {
+    @apply w-full bg-transparent focus:outline-none placeholder:opacity-60;
+  }
+}
